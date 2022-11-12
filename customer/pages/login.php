@@ -64,6 +64,8 @@
                   <div class="text-center">
                     <a class="small" href="register.php">Create an Account!</a>
                   </div>
+                  <a href="../../index.html">Home</a>
+                    <hr>
                 </form>
                 </div>
               </div>

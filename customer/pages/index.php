@@ -1,237 +1,153 @@
 <?php
 include'../includes/connection.php';
 include'../includes/sidebar.php';
-?><?php 
-
-                $query = 'SELECT ID, t.TYPE
-                          FROM users u
-                          JOIN type t ON t.TYPE_ID=u.TYPE_ID WHERE ID = '.$_SESSION['MEMBER_ID'].'';
-                $result = mysqli_query($db, $query) or die (mysqli_error($db));
-      
-                while ($row = mysqli_fetch_assoc($result)) {
-                          $Aa = $row['TYPE'];
+  $query = 'SELECT ID, t.TYPE
+            FROM users u
+            JOIN type t ON t.TYPE_ID=u.TYPE_ID WHERE ID = '.$_SESSION['MEMBER_ID'].'';
+  $result = mysqli_query($db, $query) or die (mysqli_error($db));
+  
+  while ($row = mysqli_fetch_assoc($result)) {
+            $Aa = $row['TYPE'];
                    
-if ($Aa=='User'){
-           
-             ?>    <script type="text/javascript">
-                      //then it will be redirected
-                      alert("Restricted Page! You will be redirected to POS");
-                      window.location = "pos.php";
-                  </script>
-             <?php   }
-                         
-           
-}   
-            ?>
-          <div class="row show-grid">
-            <!-- Customer ROW -->
-            <div class="col-md-3">
-            <!-- Customer record -->
-            <div class="col-md-12 mb-3">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-0">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Customers</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">
-                        <?php 
-                        $query = "SELECT COUNT(*) FROM customer";
-                        $result = mysqli_query($db, $query) or die(mysqli_error($db));
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo "$row[0]";
-                          }
-                        ?> Record(s)
-                      </div>
-                    </div>
-                      <div class="col-auto">
-                        <i class="fas fa-users fa-2x text-gray-300"></i>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  if ($Aa=='User'){
+?>
+  <script type="text/javascript">
+    //then it will be redirected
+    alert("Restricted Page! You will be redirected to POS");
+    window.location = "pos.php";
+  </script>
+<?php
+  }           
+}
+$sql = "SELECT DISTINCT CNAME, CATEGORY_ID FROM category order by CNAME asc";
+$result = mysqli_query($db, $sql) or die ("Bad SQL: $sql");
 
-            <!-- Supplier record -->
-            <div class="col-md-12 mb-3">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-0">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Supplier</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">
-                        <?php 
-                        $query = "SELECT COUNT(*) FROM supplier";
-                        $result = mysqli_query($db, $query) or die(mysqli_error($db));
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo "$row[0]";
-                          }
-                        ?> Record(s)
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+$aaa = "<select class='form-control' name='category' required>
+        <option disabled selected hidden>Select Category</option>";
+  while ($row = mysqli_fetch_assoc($result)) {
+    $aaa .= "<option value='".$row['CATEGORY_ID']."'>".$row['CNAME']."</option>";
+  }
 
-          </div>
-            <!-- Employee ROW -->
-          <div class="col-md-3">
-            <!-- Employee record -->
-            <div class="col-md-12 mb-3">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-0">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Employees</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">
-                        <?php 
-                        $query = "SELECT COUNT(*) FROM employee";
-                        $result = mysqli_query($db, $query) or die(mysqli_error($db));
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo "$row[0]";
-                          }
-                        ?> Record(s)
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- User record -->
-            <div class="col-md-12 mb-3">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-0">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Registered Account</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">
-                        <?php 
-                        $query = "SELECT COUNT(*) FROM users WHERE TYPE_ID=2";
-                        $result = mysqli_query($db, $query) or die(mysqli_error($db));
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo "$row[0]";
-                          }
-                        ?> Record(s)
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+$aaa .= "</select>";
 
-          </div>
-          <!-- PRODUCTS ROW -->
-          <div class="col-md-3">
-            <!-- Product record -->
-            <div class="col-md-12 mb-3">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
+$sql2 = "SELECT DISTINCT SUPPLIER_ID, COMPANY_NAME FROM supplier order by COMPANY_NAME asc";
+$result2 = mysqli_query($db, $sql2) or die ("Bad SQL: $sql2");
 
-                    <div class="col mr-0">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Product</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h6 mb-0 mr-3 font-weight-bold text-gray-800">
-                          <?php 
-                          $query = "SELECT COUNT(*) FROM product";
-                          $result = mysqli_query($db, $query) or die(mysqli_error($db));
-                          while ($row = mysqli_fetch_array($result)) {
-                              echo "$row[0]";
-                            }
-                          ?> Record(s)
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+$sup = "<select class='form-control' name='supplier' required>
+        <option disabled selected hidden>Select Supplier</option>";
+  while ($row = mysqli_fetch_assoc($result2)) {
+    $sup .= "<option value='".$row['SUPPLIER_ID']."'>".$row['COMPANY_NAME']."</option>";
+  }
 
-                    <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            </div>
+$sup .= "</select>";
+?>
             
-          <!-- RECENT PRODUCTS -->
-                <div class="col-lg-3">
-                    <div class="card shadow h-100">
-                      <div class="card-body">
-                        <div class="row no-gutters align-items-center">
+            <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h4 class="m-2 font-weight-bold text-primary">Cereal&nbsp;<a  href="#" data-toggle="modal" data-target="#aModal" type="button" class="btn btn-primary bg-gradient-primary" style="border-radius: 0px;"><i class="fas fa-fw fa-plus"></i></a></h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> 
+               <thead>
+                   <tr>
+                     <th>Cereal Code</th>
+                     <th>Name</th>
+                     <th>Price</th>
+                     <th>Category</th>
+                     <th>Action</th>
+                   </tr>
+               </thead>
+          <tbody>
 
-                          <div class="col-auto">
-                            <i class="fa fa-th-list fa-fw"></i> 
-                          </div>
-
-                        <div class="panel-heading"> Recent Products
-                        </div>
-                        <div class="row no-gutters align-items-center mt-1">
-                        <div class="col-auto">
-                          <div class="h6 mb-0 mr-0 text-gray-800">
-                        <!-- /.panel-heading -->
-                        
-                        <div class="panel-body">
-                            <div class="list-group">
-                              <?php 
-                                $query = "SELECT NAME, PRODUCT_CODE FROM product order by PRODUCT_ID DESC LIMIT 10";
-                                $result = mysqli_query($db, $query) or die(mysqli_error($db));
-                                while ($row = mysqli_fetch_array($result)) {
-
-                                    echo "<a href='#' class='list-group-item text-gray-800'>
-                                          <i class='fa fa-tasks fa-fw'></i> $row[0]
-                                          </a>";
-                                  }
-                              ?>
+<?php                  
+    $query = 'SELECT PRODUCT_ID, PRODUCT_CODE, NAME, PRICE, CNAME, DATE_STOCK_IN FROM product p join category c on p.CATEGORY_ID=c.CATEGORY_ID GROUP BY PRODUCT_CODE';
+        $result = mysqli_query($db, $query) or die (mysqli_error($db));
+      
+            while ($row = mysqli_fetch_assoc($result)) {
+                                 
+                echo '<tr>';
+                echo '<td>'. $row['PRODUCT_CODE'].'</td>';
+                echo '<td>'. $row['NAME'].'</td>';
+                echo '<td>'. $row['PRICE'].'</td>';
+                echo '<td>'. $row['CNAME'].'</td>';
+                      echo '<td align="right"> <div class="btn-group">
+                              <a type="button" class="btn btn-primary bg-gradient-primary" href="pro_searchfrm.php?action=edit & id='.$row['PRODUCT_CODE'] . '"><i class="fas fa-fw fa-list-alt"></i> Details</a>
+                            <div class="btn-group">
+                              <a type="button" class="btn btn-primary bg-gradient-primary dropdown no-arrow" data-toggle="dropdown" style="color:white;">
+                              ... <span class="caret"></span></a>
+                            <ul class="dropdown-menu text-center" role="menu">
+                                <li>
+                                  <a type="button" class="btn btn-warning bg-gradient-warning btn-block" style="border-radius: 0px;" href="pro_edit.php?action=edit & id='.$row['PRODUCT_ID']. '">
+                                    <i class="fas fa-fw fa-edit"></i> Edit
+                                  </a>
+                                </li>
+                            </ul>
                             </div>
-                            <!-- /.list-group -->
-                            <a href="product.php" class="btn btn-default btn-block">View All Products</a>
+                          </div> </td>';
+                echo '</tr> ';
+                        }
+?> 
+                                    
+                                </tbody>
+                            </table>
                         </div>
-                        <!-- /.panel-body -->
-                    </div></div></div></div></div></div>
-          <!-- 
-          <div class="col-md-3">
-           <div class="col-md-12 mb-2">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1"><i class="fas fa-list text-danger">&nbsp;&nbsp;&nbsp;</i>Recent Products</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">
-                        <?php 
-                          $query = "SELECT NAME FROM product order by PRODUCT_ID DESC LIMIT 10";
-                          $result = mysqli_query($db, $query) or die(mysqli_error($db));
-                          while ($row = mysqli_fetch_array($result)) {
-                              echo "<ul style='list-style-position: outside'>";
-                              echo "<li>$row[0]</li>";
-                              echo "</ul>";
-                            }
-                          ?>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            </div> -->
-            
-
-          </div>
 
 <?php
 include'../includes/footer.php';
 ?>
+
+  <!-- Product Modal-->
+  <div class="modal fade" id="aModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Cereal</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" method="post" action="pro_transac.php?action=add">
+           <div class="form-group">
+             <input class="form-control" placeholder="Cereal Code" name="prodcode" required>
+           </div>
+           <div class="form-group">
+             <input class="form-control" placeholder="Name" name="name" required>
+           </div>
+           <div class="form-group">
+             <textarea rows="5" cols="50" texarea" class="form-control" placeholder="Description" name="description" required></textarea>
+           </div>
+           <div class="form-group">
+             <input type="number"  min="1" max="999999999" class="form-control" placeholder="Quantity" name="quantity" required>
+           </div>
+           <div class="form-group">
+             <input type="number"  min="1" max="999999999" class="form-control" placeholder="On Hand" name="onhand" required>
+           </div>
+           <div class="form-group">
+             <input type="number"  min="1" max="9999999999" class="form-control" placeholder="Price" name="price" required>
+           </div>
+           <div class="form-group">
+             <?php
+               echo $aaa;
+             ?>
+           </div>
+           <div class="form-group">
+             <?php
+               echo $sup;
+             ?>
+           </div>
+           <div class="form-group">
+             <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Date Stock In" name="datestock" required>
+           </div>
+            <hr>
+            <button type="submit" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Save</button>
+            <button type="reset" class="btn btn-danger"><i class="fa fa-times fa-fw"></i>Reset</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>      
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>

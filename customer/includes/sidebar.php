@@ -36,7 +36,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Home | Admin</title>
+  <title>Customer Order</title>
   <link rel="icon" href="https://www.freeiconspng.com/uploads/sales-icon-7.png">
 
   <!-- Custom fonts for this template-->
@@ -63,7 +63,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Manage Sales</div>
+        <div class="sidebar-brand-text mx-3">Customer Product Selection</div>
       </a>
 
       <!-- Divider -->
@@ -83,17 +83,17 @@
         Tables
       </div>
       <!-- Tables Buttons -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="customer.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Customer</span></a>
-      </li>
+      </li> -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="employee.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Employee</span></a>
-      </li>
+      </li> -->
       
       <li class="nav-item">
         <a class="nav-link" href="product.php">
@@ -107,23 +107,23 @@
           <span>Inventory</span></a>
       </li>
       
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="transaction.php">
           <i class="fas fa-fw fa-retweet"></i>
           <span>Transaction</span></a>
-      </li>
+      </li> -->
       
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="supplier.php">
           <i class="fas fa-fw fa-cogs"></i>
           <span>Supplier</span></a>
-      </li>
+      </li> -->
       
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="user.php">
           <i class="fas fa-fw fa-users"></i>
           <span>Accounts</span></a>
-      </li>
+      </li> -->
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

@@ -61,9 +61,9 @@
                     </div>
                     <button class="btn btn-primary btn-user btn-block" type="submit" name="btnlogin">Login</button>
                     <hr>
-                  <!-- <div class="text-center">
+                  <div class="text-center">
                     <a class="small" href="register.php">Create an Account!</a>
-                  </div> -->
+                  </div>
                 </form>
                 </div>
               </div>
